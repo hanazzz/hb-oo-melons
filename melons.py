@@ -28,9 +28,6 @@ class AbstractMelonOrder:
             base_price = base_price * 1.5
 
         total = (1 + self.tax) * self.qty * base_price
-        
-        if self.qty < 10 and self.order_type == "international":
-            total = total + 3
 
         return total
 
@@ -53,6 +50,16 @@ class InternationalMelonOrder(AbstractMelonOrder):
     order_type = "international"
     tax = 0.17
 
+    def get_total(self):
+        """Check if order qty is less than 10 and add fee"""
+
+        if self.qty < 10:
+            total = super().get_total() + 3
+        else:
+            total = super().get_total()
+        
+        return total
+
     def get_country_code(self):
         """Return the country code."""
 
@@ -66,7 +73,7 @@ class GovernmentMelonOrder(AbstractMelonOrder):
     passed_inspection = False
 
     def mark_inspection(self, passed):
-
+    
         if passed == True:
             self.passed_inspection = True
 

@@ -20,6 +20,13 @@ class AbstractMelonOrder:
         self.shipped = False
         self.country_code = country_code
 
+        try:
+            if self.qty > 100:
+                raise TooManyMelonsError
+
+        except TooManyMelonsError:          
+            print("TOO MANY MELONS")     
+
 
     def get_total(self):
         """Calculate price, including tax."""
@@ -100,14 +107,13 @@ class GovernmentMelonOrder(AbstractMelonOrder):
         if passed == True:
             self.passed_inspection = True
 
-"""
-mylist.sorted()
-print(mylist)
+class TooManyMelonsError(ValueError):
 
-sort(mylist2)
-print(mylist2)
-mylist2_sorted = sorted(mylist2)
-"""
+    pass
+
+
+# order0 = DomesticMelonOrder("watermelon", 6)
+# order1 = DomesticMelonOrder("watermelon", 101)
 
 # DAY OF WEEK
 # today = datetime.date(2022, 8, 18)
@@ -116,3 +122,21 @@ mylist2_sorted = sorted(mylist2)
 
 # TIME
 # datetime.time
+              
+        
+
+
+# a=10
+# b=1
+# result= a/b
+
+# try:
+#     result = a/b
+#     if result == 10:
+#         raise TooManyMelonsError
+
+# except TooManyMelonsError:          
+#     print("TOO MANY MELONS")           
+# 
+# https://www.geeksforgeeks.org/user-defined-exceptions-python-examples/
+# https://stackoverflow.com/questions/46899946/access-class-variables-from-another-class 

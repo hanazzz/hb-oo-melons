@@ -44,6 +44,18 @@ class AbstractMelonOrder:
 
         random_base_price = random.randint(5, 9)
 
+        # Returning today's date and time (year, month, day, hour, minute, etc.), store in current_datetime
+        current_datetime = datetime.datetime.now()
+        # Get integer representing weekday of current_date (0 = Mon; 6 = Sun)
+        weekday_number = current_datetime.weekday()
+        # Get current hour by looking at hour attribute of current_datetime
+        current_hour = current_datetime.hour
+
+        # Check if hour between 8 and 11 + if weekday is Mon (0) - Fri (5)
+        # If yes, add $4 to random_base_price
+        if current_hour in range(8,12) and weekday_number in range(0,5):
+            random_base_price += 4
+
         return random_base_price
 
 
@@ -97,6 +109,10 @@ print(mylist2)
 mylist2_sorted = sorted(mylist2)
 """
 
+# DAY OF WEEK
 # today = datetime.date(2022, 8, 18)
-# >>> today_day = today.weekday()
-#today_day will output the index of the day of the week
+# today_day = today.weekday()
+# today_day will output the index of the day of the week
+
+# TIME
+# datetime.time

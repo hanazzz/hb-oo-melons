@@ -1,6 +1,7 @@
 """Classes for melon orders."""
 from itertools import count
-
+import random
+import datetime
 
 class AbstractMelonOrder:
     """An abstract base class that other Melon Orders inherit from."""
@@ -19,10 +20,11 @@ class AbstractMelonOrder:
         self.shipped = False
         self.country_code = country_code
 
+
     def get_total(self):
         """Calculate price, including tax."""
 
-        base_price = 5
+        base_price = self.get_base_price()
 
         if self.species == "christmas":
             base_price = base_price * 1.5
@@ -31,10 +33,18 @@ class AbstractMelonOrder:
 
         return total
 
+
     def mark_shipped(self):
         """Record the fact than an order has been shipped."""
 
         self.shipped = True
+
+
+    def get_base_price(self):
+
+        random_base_price = random.randint(5, 9)
+
+        return random_base_price
 
 
 class DomesticMelonOrder(AbstractMelonOrder):
@@ -66,6 +76,7 @@ class InternationalMelonOrder(AbstractMelonOrder):
         return self.country_code
 
 
+
 class GovernmentMelonOrder(AbstractMelonOrder):
     """A U.S. government melon order."""
     order_type = 'government'
@@ -85,3 +96,7 @@ sort(mylist2)
 print(mylist2)
 mylist2_sorted = sorted(mylist2)
 """
+
+# today = datetime.date(2022, 8, 18)
+# >>> today_day = today.weekday()
+#today_day will output the index of the day of the week
